@@ -1,40 +1,35 @@
-# file called node and import class Node in the file
-from node import Node
+# Import random class
+import random
+class Number_Guesser:
+  
+  def __init__(self, player_names):
+    self.player_guesses = {}
 
-class Stack:
-  def __init__(self, limit=1000):
-    self.top_item = None
-    self.size = 0
-    self.limit = limit
-
-  def push(self, value):
-    item = Node(value)
-    # set the next node into top item
-    item.set_next_node(self.top_item)
-    # set item into top item
-    self.top_item = item
-    # Increment stack size by 1 here:
-    self.size += 1
-
-  def pop(self):
-    if self.size > 0:
-      item_to_remove = self.top_item
-      # updaate the next node up top item 
-      self.top_item = item_to_remove.get_next_node()
-      # decrement by 1
-      self.size -= 1
-      return item_to_remove.get_value()
-    else:
-      print("This stack is totally empty.")
-
-  def peek(self):
-    if self.size > 0:
-      return self.top_item.get_value()
-    else:
-      print("Nothing to see here!")
+    # Adds names and -1 to player_guesses
+    for name in player_names:
+      self.player_guesses[name] = -1
       
-  # Define has_space() and is_empty() below:
-  def has_space(self):
-    if self.limit > self.size:
-      return True
+    # Update to choose a random number
+    self.secret_number = -1
 
+  def add_player_guess(self, name, guess):
+    # Fill in this method
+    pass
+    
+  def print_answer(self):
+    print(str(self.secret_number), "is the secret number!")
+    
+  def print_guesses(self):
+    for player in self.player_guesses.items():
+      if player[1] != -1:
+        print(player[0], "guessed", str(player[1]))
+      else:
+        print(player[0], "needs to guess!") 
+
+game1 = Number_Guesser(["Thuy", "Joe", "Diya"])
+game1.add_player_guess("Roger", 10)
+game1.add_player_guess("Diya", 8)
+game1.add_player_guess("Thuy", 1)
+game1.add_player_guess("Joe", 5)
+game1.print_guesses()
+game1.print_answer()
