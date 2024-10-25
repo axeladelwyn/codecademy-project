@@ -1,35 +1,42 @@
-# Import random class
-import random
-class Number_Guesser:
-  
-  def __init__(self, player_names):
-    self.player_guesses = {}
+result = 1
+call_stack = []
+def sum_to_one(n):
+    while n != 1:
+        execution_context = {"n_value": n}
+        call_stack.append(execution_context)
+        print(f"Push: n = {n}")
+        print(f"Stack: {[ctx["n_value"] for ctx in call_stack]}")
+        n -= 1
+    print("\nBase CASE REACHED: n = 1")
 
-    # Adds names and -1 to player_guesses
-    for name in player_names:
-      self.player_guesses[name] = -1
-      
-    # Update to choose a random number
-    self.secret_number = -1
+    # Inwinding the call stack (simulating recursive returns)
 
-  def add_player_guess(self, name, guess):
-    # Fill in this method
-    pass
-    
-  def print_answer(self):
-    print(str(self.secret_number), "is the secret number!")
-    
-  def print_guesses(self):
-    for player in self.player_guesses.items():
-      if player[1] != -1:
-        print(player[0], "guessed", str(player[1]))
-      else:
-        print(player[0], "needs to guess!") 
+    print("\nUnwinding call stack:")
+    running_sum = result
+    while len(call_stack) > 0:
+        return_value = call_stack.pop()
+        running_sum += return_value["n_value"]
+        print(f"Pop: n = {return_value["n_value"]}")
+        print(f"Running sum = {running_sum}")
 
-game1 = Number_Guesser(["Thuy", "Joe", "Diya"])
-game1.add_player_guess("Roger", 10)
-game1.add_player_guess("Diya", 8)
-game1.add_player_guess("Thuy", 1)
-game1.add_player_guess("Joe", 5)
-game1.print_guesses()
-game1.print_answer()
+    return running_sum
+
+def test_sum_to_one():
+    test_case = [4, 5, 1, 2]
+
+    for n in test_case:
+        print(f"\n{'='*40}")
+        print(f"Testing sum_to_one({n})")
+        result = sum_to_one(n)
+        print(f"Final result: {result}")
+
+        expected = sum(range(1, n + 1))
+        print(f"Verification: sum(1..{n}) = {expected}")
+        assert result == expected, f"Test failed for n={n}"
+
+
+
+        
+# Run the tests
+if __name__ == "__main__":
+    test_sum_to_one()
